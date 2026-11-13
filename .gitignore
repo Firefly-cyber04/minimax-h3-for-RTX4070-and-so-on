@@ -1,0 +1,25 @@
+# 本仓库只含配置、脚本和文档，不含任何模型权重或本机产物。
+*.gguf
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.onnx
+
+# ComfyUI 产物
+output/
+input/
+models/
+
+# 本机/临时
+*.partial
+*.log
+*.tmp
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# 凭据
+.env
+*.token

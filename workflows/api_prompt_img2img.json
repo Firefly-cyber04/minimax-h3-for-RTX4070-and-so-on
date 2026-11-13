@@ -1,0 +1,151 @@
+{
+  "1": {
+    "class_type": "UnetLoaderGGUF",
+    "inputs": {
+      "unet_name": "MiniMax-H3-Image-Pruned-Q3_K_M.gguf"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+      "type": "minimax",
+      "device": "cpu"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "minimax_h3_image_vae_fp16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "reference_bakery.png",
+      "upload": "image"
+    }
+  },
+  "5": {
+    "class_type": "ResizeImageMaskNode",
+    "inputs": {
+      "input": [
+        "4",
+        0
+      ],
+      "resize_type": {
+        "megapixels": 4.0
+      },
+      "scale_method": "area"
+    }
+  },
+  "6": {
+    "class_type": "ResizeImageMaskNode",
+    "inputs": {
+      "input": [
+        "5",
+        0
+      ],
+      "resize_type": {
+        "multiple": 32
+      },
+      "scale_method": "area"
+    }
+  },
+  "7": {
+    "class_type": "GetImageSize",
+    "inputs": {
+      "image": [
+        "6",
+        0
+      ]
+    }
+  },
+  "8": {
+    "class_type": "MiniMaxH3ImageConditioning",
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ],
+      "images": {
+        "image_1": [
+          "6",
+          0
+        ]
+      },
+      "prompt": "The storefront in <Picture 1> is <Subject 1>. The target image shows <Subject 1> at night in the rain. <Subject 1> is fully preserved. The daylight sky and dry pavement of the original are replaced by a heavy rain-soaked night: the sky becomes deep indigo-black with falling rain streaks, the previously dry cobblestones turn into a wet mirror throwing long vertical reflections of the shop lights, and the warm interior glow is joined by a cold blue-white neon sign above the door that casts a cyan wash across the upper doorframe and the wall to its left.",
+      "width": [
+        "7",
+        0
+      ],
+      "height": [
+        "7",
+        1
+      ]
+    }
+  },
+  "9": {
+    "class_type": "ConditioningZeroOut",
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ]
+    }
+  },
+  "10": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "9",
+        0
+      ],
+      "latent_image": [
+        "8",
+        1
+      ],
+      "seed": 42,
+      "steps": 6,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0
+    }
+  },
+  "11": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "11",
+        0
+      ],
+      "filename_prefix": "minimax_h3_image_i2i"
+    }
+  }
+}

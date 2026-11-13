@@ -1,0 +1,33 @@
+=== H3-Image 图生图（参考图编辑）提示词范例 ===
+说明：本机没装提示词扩写器，所以下面每一条都必须写成"已经扩写好的完整目标图描述"，
+      而不是短指令。三段式结构：Part 1 主体定义 → Part 2 保留关系 → Part 3 变更与新增。
+
+
+=== 例 1：官方模板的出租车例（结构范本）===
+【官方原文短指令 - 本机不能直接用】
+Replace the vintage yellow taxi in <Picture 1> with a pastel pink ice-cream truck with a scalloped awning and a glowing service window, sitting in the same side profile at the curb.
+
+【本机可用版：自己补全成完整目标图描述】
+The vintage yellow taxi in <Picture 1> is <Subject 1>. The target image shows <Subject 1> in the same street, viewed from the same side profile at the curb. <Subject 1> is partially preserved; its position at the curb, its scale relative to the street and the camera angle remain, while its yellow taxi body changes to a pastel pink ice-cream truck with a scalloped awning and a glowing service window. The new truck's body is matte pastel pink with a cream scalloped awning trimmed along its roof edge, and a warm rectangular service window glows through the side opening, spilling a soft amber pool of light onto the pavement beneath the counter and faintly tinting the nearest shopfront.
+
+
+=== 例 2：面包店 → 雨夜霓虹（整体换氛围，主体完全保留）===
+The storefront in <Picture 1> is <Subject 1>. The target image shows <Subject 1> at night in the rain. <Subject 1> is fully preserved. The daylight sky and dry pavement of the original are replaced by a heavy rain-soaked night: the sky becomes deep indigo-black with falling rain streaks, the previously dry cobblestones turn into a wet mirror throwing long vertical reflections of the shop lights, and the warm interior glow is joined by a cold blue-white neon sign above the door that casts a cyan wash across the upper doorframe and the wall to its left. Thin mist drifts along the ground and gathers in the gutter line.
+
+
+=== 例 3：只换服装（主体部分保留）===
+The girl in <Picture 1> is <Subject 1>. The target image shows <Subject 1> in the same room, from the same camera angle, in the same seated pose. <Subject 1> is partially preserved; her face, hairstyle, hair colour, eye colour, body proportions and seated pose remain exactly as in the reference, while her clothing changes to a black-and-purple witch costume: a fitted bodice with violet trim, a pleated mini skirt, opaque thigh-high stockings, a wide pointed hat with a buckled band, and a ribbon choker at the neck. <Subject 1> holds a small glowing purple orb in the right hand, and the orb casts a soft violet rim light onto the lower half of the costume and onto the floor beneath it, where the reflection carries a faint violet tint.
+
+
+=== 例 4：反例 - 为什么这么写没效果 ===
+Keep the character's exact face, hairstyle, eye colour and body identity unchanged, and keep the same framing and pose, but restyle the entire scene into a cold rainy midnight witch aesthetic: replace the outfit with a wide-brimmed pointed black witch hat with a midnight-blue velvet band and a dangling gold charm, a high-collared midnight-blue cloak trimmed with gold embroidery over a dark pleated dress with lace cuffs and ribbon ties, black thigh-high boots, and a slender dark-wood wand with a faint amber crystal at its tip in a belt loop. Turn the background into a deserted rain-soaked cobblestone alley at night with bare iron streetlamps, dark timber-framed houses with warm glowing windows, drifting mist, visible rain streaks and shallow reflective puddles. Light the scene with cold indigo-teal moonlight from above plus a pale cyan rim light on her hair and hood, with one warm amber lantern glow as the only warm accent. Add many changing expressions to the same face within the composition: a soft closed-lip smile, a bright open laugh, a raised-brow skeptical squint, a startled wide-eyed look, a worried frown, a playful wink, a determined narrowed gaze, a dreamy half-lidded upward look, and a cold stern glare, all readable on the same character.
+
+问题四处：
+  1. "Keep ... unchanged" 之后又用 80 词把发型/眼睛/衣着重描述一遍 → 模型会重画脸
+  2. 服饰是"变化项"却被当保留项描述 → 应该放 Part 3
+  3. "Add many changing expressions" → 单张图放不下九种表情
+  4. 场景整体重写 = 等于换 T2I，参考图白给
+
+
+=== 通用骨架（照抄填空）===
+The <主体类型> in <Picture 1> is <Subject 1>, <只写原文可见的身份特征>. The target image shows <Subject 1> <场景/动作/机位/光线>. <Subject 1> is fully preserved. <Subject 1> now <变化后的最终形态>. <落地细节：接触、遮挡、阴影、反光、透视、光照变化>.
